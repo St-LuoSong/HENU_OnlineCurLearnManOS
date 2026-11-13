@@ -1,0 +1,100 @@
+server:
+  port: ${SERVER_PORT:8080}
+  # SSE 依赖逐帧刷出，启用压缩会重新引入攒批，导致「回答一次性出现」。
+  compression:
+    enabled: ${SERVER_COMPRESSION_ENABLED:false}
+
+spring:
+  application:
+    name: onlinecurlearnmanos-server
+  servlet:
+    multipart:
+      # 与 app.file.max-size-bytes 保持一致：超限请求在这里被拒绝并统一返回 400
+      max-file-size: ${SPRING_MULTIPART_MAX_FILE_SIZE:20MB}
+      max-request-size: ${SPRING_MULTIPART_MAX_REQUEST_SIZE:24MB}
+  config:
+    import:
+      - optional:file:.env[.properties]
+      - optional:file:server/.env[.properties]
+  datasource:
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:onlinecurlearnmanos}?useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_0900_ai_ci&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: ${FLYWAY_ENABLED:true}
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:120}
+
+app:
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+  rate-limit:
+    auth-per-minute: ${APP_RATE_LIMIT_AUTH_PER_MINUTE:10}
+    ai-per-minute: ${APP_RATE_LIMIT_AI_PER_MINUTE:30}
+  bootstrap-admin:
+    enabled: ${APP_BOOTSTRAP_ADMIN_ENABLED:false}
+    username: ${APP_BOOTSTRAP_ADMIN_USERNAME:admin}
+    password: ${APP_BOOTSTRAP_ADMIN_PASSWORD:}
+  security:
+    encryption-key: ${APP_ENCRYPTION_KEY:}
+    revocation-purge-interval-ms: ${APP_JWT_REVOCATION_PURGE_INTERVAL_MS:3600000}
+    revocation-purge-initial-delay-ms: ${APP_JWT_REVOCATION_PURGE_INITIAL_DELAY_MS:600000}
+  recovery:
+    interval-ms: ${APP_RECOVERY_INTERVAL_MS:300000}
+    initial-delay-ms: ${APP_RECOVERY_INITIAL_DELAY_MS:60000}
+    stale-running-minutes: ${APP_RECOVERY_STALE_RUNNING_MINUTES:15}
+    stale-reserved-minutes: ${APP_RECOVERY_STALE_RESERVED_MINUTES:15}
+  ai:
+    standard-daily-limit: ${APP_AI_STANDARD_DAILY_LIMIT:50}
+    expert-daily-limit: ${APP_AI_EXPERT_DAILY_LIMIT:3}
+  practice:
+    repeat-cost: ${APP_PRACTICE_REPEAT_COST:20}
+  file:
+    storage-root: ${APP_FILE_STORAGE_ROOT:./data/files}
+    max-size-bytes: ${APP_FILE_MAX_SIZE_BYTES:20971520}
+    allowed-extensions: ${APP_FILE_ALLOWED_EXTENSIONS:xls,xlsx,docx,pdf,md,txt}
+    # 图片用途（论坛图片、后续作业图片）使用独立的扩展名、体积与像素上限
+    image-allowed-extensions: ${APP_FILE_IMAGE_ALLOWED_EXTENSIONS:jpg,jpeg,png,webp,gif}
+    image-max-size-bytes: ${APP_FILE_IMAGE_MAX_SIZE_BYTES:5242880}
+    image-max-pixels: ${APP_FILE_IMAGE_MAX_PIXELS:20000000}
+    preview-max-rows: ${APP_FILE_PREVIEW_MAX_ROWS:200}
+    preview-max-cells: ${APP_FILE_PREVIEW_MAX_CELLS:2000}
+    preview-max-chars: ${APP_FILE_PREVIEW_MAX_CHARS:200000}
+
+llm:
+  provider:
+    default-code: ${LLM_PROVIDER_DEFAULT:openai}
+  timeout-seconds: ${LLM_TIMEOUT_SECONDS:60}
+
+point:
+  initial-balance: ${POINT_INITIAL_BALANCE:1000}
+  cost:
+    chat: ${POINT_COST_CHAT:10}
+    plan: ${POINT_COST_PLAN:30}
+    career: ${POINT_COST_CAREER:50}
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-}]"

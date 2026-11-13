@@ -1,0 +1,35 @@
+{
+  "name": "Java 21 + Node.js",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "Vue.volar"
+      ]
+    }
+  },
+  "updateContentCommand": "mvn -f server/pom.xml -q -DskipTests dependency:go-offline && npm --prefix web install",
+  "postAttachCommand": "echo 'Run backend: mvn -f server/pom.xml spring-boot:run; run frontend: npm --prefix web run dev'",
+  "portsAttributes": {
+    "8080": {
+      "label": "Backend API",
+      "onAutoForward": "silent"
+    },
+    "5173": {
+      "label": "Frontend",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [
+    8080,
+    5173
+  ]
+}

@@ -1,0 +1,15 @@
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background: linear-gradient(180deg, #f8fbff 0, var(--paper) 260px, var(--paper) 100%);
+}
+
+::selection {
+  color: var(--primary-deep);
+  background: var(--primary-soft);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}

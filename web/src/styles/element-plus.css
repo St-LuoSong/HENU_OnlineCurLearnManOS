@@ -1,0 +1,130 @@
+.el-button {
+  --el-button-font-weight: 600;
+  border-radius: var(--radius-md);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.el-button--primary {
+  box-shadow: var(--shadow-primary);
+}
+
+.el-button--primary:hover {
+  box-shadow: 0 12px 28px rgba(59, 120, 240, 0.3);
+}
+
+.el-button.is-text,
+.el-button.is-link {
+  box-shadow: none;
+}
+
+.el-input__wrapper,
+.el-textarea__inner {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px var(--rule) inset;
+}
+
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  box-shadow:
+    0 0 0 1px var(--primary) inset,
+    0 0 0 4px rgba(59, 120, 240, 0.1);
+}
+
+.el-select__wrapper {
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px var(--rule) inset;
+}
+
+.el-form-item__label {
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.el-table {
+  --el-table-border-color: var(--rule);
+  --el-table-header-bg-color: #f7faff;
+  --el-table-row-hover-bg-color: var(--primary-wash);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.el-table th.el-table__cell {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.el-dialog,
+.el-message-box {
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+}
+
+.el-dialog__header {
+  padding: 20px 24px 12px;
+  margin-right: 0;
+}
+
+.el-dialog__body {
+  padding: 8px 24px 20px;
+}
+
+.el-dialog__footer {
+  padding: 0 24px 20px;
+}
+
+.el-drawer {
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+
+.el-tag {
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.el-card {
+  border-color: var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.el-pagination {
+  --el-pagination-button-bg-color: transparent;
+  --el-pagination-hover-color: var(--primary);
+}
+
+.el-pagination .btn-prev,
+.el-pagination .btn-next,
+.el-pagination .el-pager li {
+  border-radius: var(--radius-sm);
+}
+
+.el-progress-bar__outer {
+  background: var(--paper-deep);
+}
+
+.el-upload-dragger {
+  background: var(--primary-wash);
+  border-color: var(--rule-strong);
+  border-radius: var(--radius-lg);
+}
+
+.el-upload-dragger:hover {
+  border-color: var(--primary);
+}
+
+.el-message {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+.el-popover.el-popper,
+.el-dropdown__popper.el-popper {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}

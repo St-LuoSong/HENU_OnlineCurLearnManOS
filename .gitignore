@@ -1,0 +1,39 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java / Maven
+server/target/
+*.class
+*.log
+.m2/
+
+# Node / Vite
+web/node_modules/
+web/dist/
+web/.vite/
+*.local
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Runtime
+*.pid
+*.tmp
+
+# Local file storage (V22 file asset center)
+data/files/
+server/data/
+
+# Local documentation workspace and generated caches
+/docs/
+/需求分析文档/
+__pycache__/
+*.pyc
